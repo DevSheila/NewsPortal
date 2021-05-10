@@ -36,7 +36,6 @@ public class App {
             res.body(gson.toJson(jsonMap));
         });
 
-
         after((req, res) ->{
             res.type("application/json");
         });
