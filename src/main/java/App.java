@@ -12,6 +12,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -50,43 +51,23 @@ public class App {
             return gson.toJson(department);
         });
 
+
         post("/generalNews/new", "application/json", (req, res) -> {
-            GeneralNews generalNews = gson.fromJson(req.body(), GeneralNews.class);
-           generalNewsDao.add(generalNews);
+            GeneralNews news = gson.fromJson(req.body(), GeneralNews.class);
+            generalNewsDao.add(news);
             res.status(201);
-            return gson.toJson(generalNews);
+            return gson.toJson(generalNewsDao);
         });
 
-        post("/departmentalNews/new", "application/json", (req, res) -> {
-            DepNews departmentalNews = gson.fromJson(req.body(), DepNews.class);
-            generalNewsDao.add(departmentalNews);
-            res.status(201);
-            return gson.toJson(departmentalNews);
-        });
-
-        //READ
-        get("/departments", "application/json", (req, res) -> {
-            System.out.println(departmentDao.all());
-
-            if(departmentDao.all().size() > 0){
-                return gson.toJson(departmentDao.all());
-            }
-
-            else {
-                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
-            }
-
-        });
-
-        get("/departments/:id", "application/json", (req, res) -> {
+        post("/departments/:id/news/new", "application/json", (req, res) -> {
             int departmentId = Integer.parseInt(req.params("id"));
-            Departments departmentToFind = departmentDao.findById(departmentId);
-            if (departmentToFind == null){
-                throw new ApiException(404, String.format("No departments with the id: \"%s\" exists", req.params("id")));
-            }
-            return gson.toJson(departmentToFind);
-
+            DepNews news= gson.fromJson(req.body(), DepNews.class);
+            depNewsDao.add(news);
+            res.status(201);
+            return gson.toJson(news);
         });
+
+
         //FILTERS
         exception(ApiException.class, (exception, req, res) -> {
             ApiException err = exception;
