@@ -1,5 +1,8 @@
 import com.google.gson.Gson;
 import exceptions.ApiException;
+import models.DepNews;
+import models.Departments;
+import models.GeneralNews;
 import models.Users;
 import models.dao.Sql2oDepNewsDao;
 import models.dao.Sql2oDepartmentDao;
@@ -38,6 +41,27 @@ public class App {
             usersDao.add(user);
             res.status(201);
             return gson.toJson(user);
+        });
+
+        post("/departments/new", "application/json", (req, res) -> {
+            Departments department = gson.fromJson(req.body(), Departments.class);
+            departmentDao.add(department);
+            res.status(201);
+            return gson.toJson(department);
+        });
+
+        post("/generalNews/new", "application/json", (req, res) -> {
+            GeneralNews generalNews = gson.fromJson(req.body(), GeneralNews.class);
+           generalNewsDao.add(generalNews);
+            res.status(201);
+            return gson.toJson(generalNews);
+        });
+
+        post("/departmentalNews/new", "application/json", (req, res) -> {
+            DepNews departmentalNews = gson.fromJson(req.body(), DepNews.class);
+            generalNewsDao.add(departmentalNews);
+            res.status(201);
+            return gson.toJson(departmentalNews);
         });
 
         //FILTERS
