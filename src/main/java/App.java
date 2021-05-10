@@ -67,6 +67,72 @@ public class App {
             return gson.toJson(news);
         });
 
+        //READ
+        get("/departments", "application/json", (req, res) -> {
+            System.out.println(departmentDao.all());
+
+            if(departmentDao.all().size() > 0){
+                return gson.toJson(departmentDao.all());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but no departments are currently listed in the database.\"}";
+            }
+
+        });
+        get("/users", "application/json", (req, res) -> {
+            System.out.println(usersDao.all());
+
+            if(usersDao.all().size() > 0){
+                return gson.toJson(usersDao.all());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but no users are currently listed in the database.\"}";
+            }
+
+        });
+        get("/generalNews", "application/json", (req, res) -> {
+            System.out.println(generalNewsDao.all());
+
+            if(generalNewsDao.all().size() > 0){
+                return gson.toJson(generalNewsDao.all());
+            }
+
+            else {
+                return "{\"message\":\"I'm sorry, but there is no general news currently listed in the database.\"}";
+            }
+
+        });
+
+        get("/departments/:id", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+            Departments departmentToFind = departmentDao.findById(departmentId);
+            if (departmentToFind == null){
+                throw new ApiException(404, String.format("No departments with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(departmentToFind);
+
+        });
+
+        get("/users/:id", "application/json", (req, res) -> {
+            int userId = Integer.parseInt(req.params("id"));
+            Users userToFind = usersDao.findById(userId);
+            if (userToFind == null){
+                throw new ApiException(404, String.format("No user with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(userToFind);
+
+        });
+        get("/generalNews/:id", "application/json", (req, res) -> {
+            int newsId = Integer.parseInt(req.params("id"));
+            GeneralNews newsToFind = generalNewsDao.findById(newsId);
+            if (newsToFind == null){
+                throw new ApiException(404, String.format("No general news with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(newsToFind);
+
+        });
 
         //FILTERS
         exception(ApiException.class, (exception, req, res) -> {
