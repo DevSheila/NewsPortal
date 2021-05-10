@@ -9,14 +9,14 @@ public class GeneralNews {
     private String body;
     private String writtenBy;
     private String type;
-    private static final String newsType="general";
+    private static final String NEWSTYPE="general";
 
     public GeneralNews(int depId, String title, String body, String writtenBy) {
         this.depId = depId;
         this.title = title;
         this.body = body;
         this.writtenBy = writtenBy;
-        this.type=this.newsType;
+        this.type=this.NEWSTYPE;
     }
 
     public int getId() {
