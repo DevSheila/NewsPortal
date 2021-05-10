@@ -134,6 +134,37 @@ public class App {
 
         });
 
+        get("/departments/:id/news", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+
+            Departments departmentToFind = departmentDao.findById(departmentId);
+            List<DepNews> allDepNews;
+
+            if (departmentToFind == null){
+                throw new ApiException(404, String.format("No department with the id: \"%s\" exists", req.params("id")));
+            }
+
+            allDepNews= departmentDao.getAllDepartmentNews(departmentId);
+
+            return gson.toJson(allDepNews);
+        });
+        get("/departments/:id/news/:newsId", "application/json", (req, res) -> {
+            int departmentId = Integer.parseInt(req.params("id"));
+            int newsId = Integer.parseInt(req.params("newsId"));
+
+
+            DepNews news = depNewsDao.findById(newsId);
+            Departments departmentToFind = departmentDao.findById(departmentId);
+
+
+            if (departmentToFind == null){
+                throw new ApiException(404, String.format("No department with the id: \"%s\" exists", req.params("id")));
+            }
+
+
+
+            return gson.toJson(news);
+        });
         //FILTERS
         exception(ApiException.class, (exception, req, res) -> {
             ApiException err = exception;
