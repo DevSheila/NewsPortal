@@ -16,6 +16,14 @@ public class Users {
         this.roles = roles;
     }
 
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -60,4 +68,6 @@ public class Users {
     public int hashCode() {
         return Objects.hash(getName(), getDepId(), getPosition(), getRoles());
     }
+
+
 }
