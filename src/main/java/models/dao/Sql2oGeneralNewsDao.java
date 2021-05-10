@@ -8,9 +8,9 @@ import org.sql2o.Sql2oException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sql2oGeneralNews implements GeneralNewsDao {
+public class Sql2oGeneralNewsDao implements GeneralNewsDao {
     private final Sql2o sql2o;
-    public Sql2oGeneralNews(Sql2o sql2o){
+    public Sql2oGeneralNewsDao(Sql2o sql2o){
         this.sql2o=sql2o;
     }
 
