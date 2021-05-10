@@ -8,12 +8,12 @@ import java.util.List;
 public interface DepNewsDao {
 
     void add (DepNews news);
-    void addDepartmentToNews(Departments department, DepNews news);
+    void addNewsToDepartment(DepNews news ,Departments department);
 
-    List<Departments> all();
+    List<DepNews> all();
     List<DepNews> getAllNewsDepartments(int newsId);
 
-    Departments findById(int id);
+    DepNews findById(int id);
     void deleteById(int id);
     void clearAll();
 }
