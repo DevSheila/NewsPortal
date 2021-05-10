@@ -28,7 +28,6 @@ Link to live site:
 1. Gradle
 1. Spark
 1. Handlebars
-1. CSS
 1. postgres
 
 
