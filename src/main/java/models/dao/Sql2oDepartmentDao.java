@@ -55,7 +55,24 @@ public class Sql2oDepartmentDao implements  DepartmentDao{
 
     @Override
     public List<DepNews> getAllDepartmentNews(int depId) {
-        return null;
+        List<DepNews> news = new ArrayList();
+        String joinQuery = "SELECT news_id FROM departments_news WHERE dep_id = :depId";
+
+        try (Connection con = sql2o.open()) {
+            List<Integer> allNewsId = con.createQuery(joinQuery)
+                    .addParameter("depId", depId)
+                    .executeAndFetch(Integer.class);
+            for (Integer  newsId: allNewsId){
+                String newsQuery = "SELECT * FROM news WHERE id = :newsId";
+                news.add(
+                        con.createQuery(newsQuery)
+                                .addParameter("newsId", newsId)
+                                .executeAndFetchFirst(DepNews.class));
+            } //why are we doing a second sql query - set?
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+        return news;
     }
 
     @Override
