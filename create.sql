@@ -28,3 +28,10 @@ CREATE TABLE news (
 
 );
 
+CREATE TABLE departments_news(
+                                 id SERIAL PRIMARY KEY,
+                                 dep_id int,
+                                 news_id int
+
+);
+

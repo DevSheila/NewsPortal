@@ -5,9 +5,9 @@ import models.Departments;
 
 import java.util.List;
 
-public interface NewsDao {
+public interface DepNewsDao {
 
-    void add (Departments department);
+    void add (DepNews news);
     void addDepartmentToNews(Departments department, DepNews news);
 
     List<Departments> all();
