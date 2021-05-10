@@ -46,7 +46,7 @@ public class Sql2oDepNewsDao implements DepNewsDao {
     @Override
     public List<DepNews> all() {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM news WHERE type ='department'")
+            return con.createQuery("SELECT * FROM news WHERE type ='departmental'")
                     .executeAndFetch(DepNews.class);
         }
     }
@@ -104,7 +104,7 @@ public class Sql2oDepNewsDao implements DepNewsDao {
 
     @Override
     public void clearAll() {
-        String sql = "DELETE from news";
+        String sql = "DELETE from news WHERE type ='departmental'";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql).executeUpdate();
         } catch (Sql2oException ex) {
