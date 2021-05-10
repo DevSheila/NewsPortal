@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class DepNews extends GeneralNews{
 
-    private static final String NEWSTYPE ="Department";
+    private static final String NEWSTYPE ="departmental";
     private  String type;
 
     public DepNews(int depId, String title, String body, String writtenBy) {
