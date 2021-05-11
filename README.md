@@ -13,7 +13,7 @@ This is a REST API for querying and retrieving scoped news and information of an
 
 * [Setup](#setup)
 
-* [BDD ](#BDD)
+* [Routes](#routes)
 
 * [Contact](#contact)
 
@@ -81,7 +81,23 @@ Run command:
 $ gradle run
 
 ```
+## Routes
 
+### users
+1. /users
+1. /users/new
+1. /users/:id
+
+###departments
+1. /departments
+1. /departments/:id
+###departmental news
+1. /departments/:id/news
+1. /departments/:id/news/:newsId
+###general news
+1. /generalNews
+1. /generalNews/new
+1. /generalNews/:id
 
 ## Contact
 In case of any question or contributions, contact me at sheilasharon10@gmail.com
