@@ -53,18 +53,29 @@ public class App {
 
 
         post("/generalNews/new", "application/json", (req, res) -> {
-            GeneralNews news = gson.fromJson(req.body(), GeneralNews.class);
-            generalNewsDao.add(news);
+            GeneralNews generalNews = gson.fromJson(req.body(), GeneralNews.class);
+            generalNewsDao.add(generalNews);
             res.status(201);
-            return gson.toJson(generalNewsDao);
+            return gson.toJson(generalNews);
         });
 
         post("/departments/:id/news/new", "application/json", (req, res) -> {
             int departmentId = Integer.parseInt(req.params("id"));
-            DepNews news= gson.fromJson(req.body(), DepNews.class);
-            depNewsDao.add(news);
-            res.status(201);
-            return gson.toJson(news);
+            Departments department = departmentDao.findById(departmentId);
+            DepNews depNews= gson.fromJson(req.body(), DepNews.class);
+            depNews.setDep_id(departmentId);
+            depNewsDao.add(depNews);
+            if(department !=null){
+
+                departmentDao.addDepartmentToNews(department,depNews);
+                res.status(201);
+                return gson.toJson(String.format("Department '%s'  has been associated with the news",department.getName()));
+            }else {
+                throw new ApiException(404, String.format("Department does not exist"));
+            }
+
+
+
         });
 
         //READ

@@ -93,6 +93,7 @@ $ gradle run
 1. /departments/:id
 ###departmental news
 1. /departments/:id/news
+1. /departments/:id/news/new
 1. /departments/:id/news/:newsId
 ###general news
 1. /generalNews
