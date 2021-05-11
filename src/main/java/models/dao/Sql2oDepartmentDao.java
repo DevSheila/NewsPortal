@@ -16,12 +16,15 @@ public class Sql2oDepartmentDao implements  DepartmentDao{
         this.sql2o=sql2o;
     }
 
+
     @Override
-    public void add(Departments department) {
-        String sql = "INSERT INTO departments (name,description,num_employees) VALUES (:name)";
-        try(Connection con = sql2o.open()){
+    public void add(Departments department){
+        String sql ="INSERT INTO departments (name,description,num_employees) VALUES(:name,:description,:num_employees)";
+        try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
-                    .bind(department)
+                    .addParameter("name", department.getName())
+                    .addParameter("description", department.getDescription())
+                    .addParameter("num_employees", department.getNumEmployees())
                     .executeUpdate()
                     .getKey();
             department.setId(id);
@@ -29,7 +32,6 @@ public class Sql2oDepartmentDao implements  DepartmentDao{
             System.out.println(ex);
         }
     }
-
     @Override
     public void addDepartmentToNews(Departments department, DepNews news) {
         String sql = "INSERT INTO departments_news (dep_id,news_id) VALUES (:depId, :newsId)";

@@ -29,7 +29,7 @@ public class App {
 
         staticFileLocation("/public");
 
-        String connectionString = "jdbc:postgresql://localhost:5432/news_portal";   //connect to jadle, not jadle_test! try not to copy paste
+        String connectionString = "jdbc:postgresql://localhost:5432/news_portal";
         Sql2o sql2o = new Sql2o(connectionString, "postgres", null);
 
         departmentDao = new Sql2oDepartmentDao(sql2o);

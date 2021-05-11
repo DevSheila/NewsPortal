@@ -4,18 +4,18 @@ import java.util.Objects;
 
 public class GeneralNews {
     private  int id;
-    private int depId;
+
     private String title;
     private String body;
-    private String writtenBy;
+    private String written_by;
     private String type;
     private static final String NEWSTYPE="general";
+    private int dep_id =0;
 
-    public GeneralNews(int depId, String title, String body, String writtenBy) {
-        this.depId = depId;
+    public GeneralNews( String title, String body, String written_by) {
         this.title = title;
         this.body = body;
-        this.writtenBy = writtenBy;
+        this.written_by = written_by;
         this.type=this.NEWSTYPE;
     }
 
@@ -25,14 +25,6 @@ public class GeneralNews {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getDepId() {
-        return depId;
-    }
-
-    public void setDepId(int depId) {
-        this.depId = depId;
     }
 
     public String getTitle() {
@@ -52,11 +44,18 @@ public class GeneralNews {
     }
 
     public String getWrittenBy() {
-        return writtenBy;
+        return written_by;
     }
 
     public void setWrittenBy(String writtenBy) {
-        this.writtenBy = writtenBy;
+        this.written_by = writtenBy;
+    }
+    public int getDep_id() {
+        return dep_id;
+    }
+
+    public void setDep_id(int dep_id) {
+        this.dep_id = dep_id;
     }
 
     public String getType() {
@@ -72,11 +71,11 @@ public class GeneralNews {
         if (this == o) return true;
         if (!(o instanceof GeneralNews)) return false;
         GeneralNews that = (GeneralNews) o;
-        return getDepId() == that.getDepId() && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getBody(), that.getBody()) && Objects.equals(getWrittenBy(), that.getWrittenBy()) && Objects.equals(getType(), that.getType());
+        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getBody(), that.getBody()) && Objects.equals(getWrittenBy(), that.getWrittenBy()) && Objects.equals(getType(), that.getType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDepId(), getTitle(), getBody(), getWrittenBy(), getType());
+        return Objects.hash(getTitle(), getBody(), getWrittenBy(), getType());
     }
 }

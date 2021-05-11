@@ -18,10 +18,14 @@ public class Sql2oDepNewsDao implements DepNewsDao {
 
     @Override
     public void add(DepNews depNews) {
-        String sql = "INSERT INTO news (dep_id,title,body,writtenBy,type) VALUES (:depId,title,body,writtenBy,type)";
+        String sql = "INSERT INTO news (dep_id,title,body,written_by,type) VALUES (:dep_id,:title,:body,:written_by,:type)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
-                    .bind(depNews)
+                    .addParameter("dep_id", depNews.getDep_id())
+                    .addParameter("title", depNews.getTitle())
+                    .addParameter("body", depNews.getBody())
+                    .addParameter("written_by", depNews.getWrittenBy())
+                    .addParameter("type", "departmental")
                     .executeUpdate()
                     .getKey();
             depNews.setId(id);

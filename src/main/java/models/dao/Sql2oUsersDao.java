@@ -16,7 +16,7 @@ public class Sql2oUsersDao implements  UsersDao{
 
     @Override
     public void add(Users user) {
-        String sql = "INSERT INTO users(name,dep_id,num_employees) VALUES (:name)";
+        String sql = "INSERT INTO users(name,depId,position ,roles) VALUES (:name,:depId,:position,:roles)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
                     .bind(user)
@@ -33,7 +33,7 @@ public class Sql2oUsersDao implements  UsersDao{
     public List<Users> all() {
         try(Connection con = sql2o.open()){
             return con.createQuery("SELECT * FROM users")
-                    .executeAndFetch(Users.class);
+                      .executeAndFetch(Users.class);
         }
     }
 

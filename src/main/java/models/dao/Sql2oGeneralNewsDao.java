@@ -17,10 +17,14 @@ public class Sql2oGeneralNewsDao implements GeneralNewsDao {
 
     @Override
     public void add(GeneralNews generalNews) {
-        String sql = "INSERT INTO news (title,body,writtenBy,type) VALUES (title,body,writtenBy,type)";
+        String sql = "INSERT INTO news (dep_id,title,body,written_by,type) VALUES (:dep_id,:title,:body,:written_by,:type)";
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true)
-                    .bind(generalNews)
+                    .addParameter("dep_id", generalNews.getDep_id())
+                    .addParameter("title", generalNews.getTitle())
+                    .addParameter("body", generalNews.getBody())
+                    .addParameter("written_by", generalNews.getWrittenBy())
+                    .addParameter("type", "general")
                     .executeUpdate()
                     .getKey();
             generalNews.setId(id);

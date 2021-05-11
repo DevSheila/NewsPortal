@@ -35,3 +35,5 @@ CREATE TABLE departments_news(
 
 );
 
+CREATE DATABASE news_portal_test WITH TEMPLATE news_portal;
+

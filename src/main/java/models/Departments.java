@@ -5,13 +5,13 @@ import java.util.Objects;
 public class Departments {
     private int id;
     private String name;
-    private String description;
-    private int numEmployees;
+    private String descri;
+    private int num_employees;
 
-    public Departments(String name, String description, int numEmployees) {
+    public Departments(String name, String descri, int num_employees) {
         this.name = name;
-        this.description = description;
-        this.numEmployees = numEmployees;
+        this.descri= descri;
+        this.num_employees = num_employees;
     }
 
     public int getId() {
@@ -31,19 +31,19 @@ public class Departments {
     }
 
     public String getDescription() {
-        return description;
+        return descri;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String descri) {
+        this.descri = descri;
     }
 
     public int getNumEmployees() {
-        return numEmployees;
+        return num_employees;
     }
 
-    public void setNumEmployees(int numEmployees) {
-        this.numEmployees = numEmployees;
+    public void setNumEmployees(int num_employees) {
+        this.num_employees = num_employees;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class Departments {
         if (this == o) return true;
         if (!(o instanceof Departments)) return false;
         Departments that = (Departments) o;
-        return getId() == that.getId() && getNumEmployees() == that.getNumEmployees() && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
+        return getNumEmployees() == that.getNumEmployees() && Objects.equals(getName(), that.getName()) && Objects.equals(descri, that.descri);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getNumEmployees());
+        return Objects.hash(getName(), descri, getNumEmployees());
     }
 }

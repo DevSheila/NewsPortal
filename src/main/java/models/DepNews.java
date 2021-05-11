@@ -4,23 +4,30 @@ import java.util.Objects;
 
 public class DepNews extends GeneralNews{
 
-    private static final String NEWSTYPE ="departmental";
-    private  String type;
-
-    public DepNews(int depId, String title, String body, String writtenBy) {
-        super(depId, title, body, writtenBy);
-        this.type=this.NEWSTYPE;
+//    private static final String NEWSTYPE ="departmental";
+//    private  String type;
+    private int dep_id;
+    public DepNews(int dep_id, String title, String body, String written_by) {
+        super( title, body, written_by);
+        this.dep_id =dep_id;
     }
 
-    @Override
-    public String getType() {
-        return type;
+    public int getDep_id() {
+        return dep_id;
     }
 
-    @Override
-    public void setType(String type) {
-        this.type = type;
+    public void setDep_id(int dep_id) {
+        this.dep_id = dep_id;
     }
+    //    @Override
+//    public String getType() {
+//        return type;
+//    }
+//
+//    @Override
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     @Override
     public boolean equals(Object o) {
